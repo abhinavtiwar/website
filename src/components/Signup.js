@@ -1,144 +1,159 @@
-
-import React, {useState} from 'react';
-import Box from "@mui/material/Box";
-import {NavLink,useNavigate } from "react-router-dom";
-
-import TextField from "@mui/material/TextField";
-import { Button, Divider } from "@mui/material";
+import React from 'react'
 
 const Signup = () => {
-  const navigate = useNavigate();
-
-  const [user, setUser] = useState({
-    name:"",email:"",phone:"",work:"",password:"",cpassword:""
-  })
-  let name,value;
-  const handleInputs=(e) =>{
-    console.log(e);
-   name=e.target.name;
-   value=e.target.value;
-   setUser({...user,[name]:value})
-  }
-const PostData=async (e) =>{
-  e.preventDefault();
-  const {name,email,phone,work,password,cpassword} =user;
-  const res = await fetch("http://localhost:4000/auth/register" ,{
-   method:"POST",
-   headers:{
-    "Content-Type" :"application/json"
-   },
-   body:JSON.stringify({
-    name,email,phone,work,password,cpassword
-   })
-  })
-  const data= await res.json();
-  if(data.status=== 422 || !data){
-    window.alert("Invalid Registration");
-    console.log("Invalid Registration");
-  }else{
-    window.alert(" Registration Sucessful");
-    console.log(" Registration Sucessful ");
-
-    navigate("/loginpage");
-  }
-}
-
   return (
-    <div style={{ background: "#eee", height: "100vh" }}>
-      <div className="row h-100 justify-content-center align-items-center">
-        <div className="col-md-3">
-          <div className="card">
-            <div className="card-body">
-              <h3 className="text-muted text-center">Sign up</h3>
-              <hr />
-              <form method='POST' className="register-form" id="register-form">
-                <div className="form-group">
-                  <TextField
-                    name="name"
-                    id="name"
-                    label="Name"
-                    variant="outlined"
-                    fullWidth
-                    value={user.name}
-                    onChange={handleInputs}
-                    sx={{ mt: 3 }}
-                  />
-                  <TextField
-                    name="email"
-                    id="email"
-                    label="Email"
-                    variant="outlined"
-                    fullWidth
-                    value={user.email}
-                    onChange={handleInputs}
-                    sx={{ mt: 3 }}
-                  />
-                  <TextField
-                    name="phone"
-                    id="phone"
-                    label="Phone"
-                    variant="outlined"
-                    fullWidth
-                    value={user.phone}
-                    onChange={handleInputs}
-                    sx={{ mt: 3 }}
-                  />
-                  <TextField
-                    name="work"
-                    id="work"
-                    label="Profession"
-                    variant="outlined"
-                    fullWidth
-                    value={user.work}
-                    onChange={handleInputs}
-                    sx={{ mt: 3 }}
-                  />
-                  <TextField
-                    name="password"
-                    id="password"
-                    label="Password"
-                    variant="outlined"
-                    fullWidth
-                    value={user.password}
-                    onChange={handleInputs}
-                    sx={{ mt: 3 }}
-                  />
-                  <TextField
-                    name="cpassword"
-                    id="cpassword"
-                    label="Confirm Password"
-                    variant="outlined"
-                    fullWidth
-                    value={user.cpassword}
-                    onChange={handleInputs}
-                    sx={{ mt: 3 }}
-                  />
+    <div>
+      <>
+  {/* Section: Design Block */}
+  <section className="background-radial-gradient overflow-hidden">
+  
+    <style
+      dangerouslySetInnerHTML={{
+        __html:
+          "\n    .background-radial-gradient {\n      background-color: hsl(218, 41%, 15%);\n      background-image: radial-gradient(650px circle at 0% 0%,\n          hsl(218, 41%, 35%) 15%,\n          hsl(218, 41%, 30%) 35%,\n          hsl(218, 41%, 20%) 75%,\n          hsl(218, 41%, 19%) 80%,\n          transparent 100%),\n        radial-gradient(1250px circle at 100% 100%,\n          hsl(218, 41%, 45%) 15%,\n          hsl(218, 41%, 30%) 35%,\n          hsl(218, 41%, 20%) 75%,\n          hsl(218, 41%, 19%) 80%,\n          transparent 100%);\n    }\n\n    #radius-shape-1 {\n      height: 220px;\n      width: 220px;\n      top: -60px;\n      left: -130px;\n      background: radial-gradient(#44006b, #ad1fff);\n      overflow: hidden;\n    }\n\n    #radius-shape-2 {\n      border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;\n      bottom: -60px;\n      right: -110px;\n      width: 300px;\n      height: 300px;\n      background: radial-gradient(#44006b, #ad1fff);\n      overflow: hidden;\n    }\n\n    .bg-glass {\n      background-color: hsla(0, 0%, 100%, 0.9) !important;\n      backdrop-filter: saturate(200%) blur(25px);\n    }\n  "
+      }}
+    />
+    <div className="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+      <div className="row gx-lg-5 align-items-center mb-5">
+        <div className="col-lg-6 mb-5 mb-lg-0" style={{ zIndex: 10 }}>
+          <h1
+            className="my-5 display-5 fw-bold ls-tight"
+            style={{ color: "hsl(218, 81%, 95%)" }}
+          >
+            The best offer <br />
+            <span style={{ color: "hsl(218, 81%, 75%)" }}>
+              for your business
+            </span>
+          </h1>
+          <p
+            className="mb-4 opacity-70"
+            style={{ color: "hsl(218, 81%, 85%)" }}
+          >
+            The vision UI Dashboard
+          </p>
+        </div>
+        <div className="col-lg-6 mb-5 mb-lg-0 position-relative">
+          <div
+            id="radius-shape-1"
+            className="position-absolute rounded-circle shadow-5-strong"
+          />
+          <div
+            id="radius-shape-2"
+            className="position-absolute shadow-5-strong"
+          />
+          <div className="card bg-glass">
+            <div className="card-body px-4 py-5 px-md-5">
+              <form>
+                {/* 2 column grid layout with text inputs for the first and last names */}
+                <div className="row">
+                <h4 className='text-center mb-4'>Register Here..</h4>
+                  <div className="col-md-6 mb-4">
+                    <div className="form-outline">
+                      <input
+                        type="text"
+                        id="form3Example1"
+                        className="form-control"
+                      />
+                      <label className="form-label" htmlFor="form3Example1">
+                        First name
+                      </label>
+                    </div>
+                  </div>
+                  <div className="col-md-6 mb-4">
+                    <div className="form-outline">
+                      <input
+                        type="text"
+                        id="form3Example2"
+                        className="form-control"
+                      />
+                      <label className="form-label" htmlFor="form3Example2">
+                        Last name
+                      </label>
+                    </div>
+                  </div>
                 </div>
-                <div className="form-group form-button">
-                  <Button
-                    name="signup"
-                    id="signup"
-                    className="form-submit"
-                    value="register"
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    onClick={PostData}
-                    sx={{ mt: 5 }}
+                {/* Email input */}
+                <div className="form-outline mb-4">
+                  <input
+                    type="email"
+                    id="form3Example3"
+                    className="form-control"
+                  />
+                  <label className="form-label" htmlFor="form3Example3">
+                    Email address
+                  </label>
+                </div>
+                {/* Password input */}
+                <div className="form-outline mb-4">
+                  <input
+                    type="password"
+                    id="form3Example4"
+                    className="form-control"
+                  />
+                  <label className="form-label" htmlFor="form3Example4">
+                    Password
+                  </label>
+                </div>
+                {/* Checkbox */}
+                <div className="form-check d-flex justify-content-center mb-4">
+                  <input
+                    className="form-check-input me-2"
+                    type="checkbox"
+                    defaultValue=""
+                    id="form2Example33"
+                    defaultChecked=""
+                  />
+                  <label className="form-check-label" htmlFor="form2Example33">
+                    Subscribe to our newsletter
+                  </label>
+                </div>
+                {/* Submit button */}
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block mb-4"
+                >
+                  Sign up
+                </button>
+                {/* Register buttons */}
+                <div className="text-center">
+                  <p>or sign up with:</p>
+                  <button
+                    type="button"
+                    className="btn btn-link btn-floating mx-1"
                   >
-                    Register
-                  </Button>
-                  <NavLink to="/loginpage"  sx={{ mt: 4 }}>I am already register</NavLink>
+                    <i className="fab fa-facebook-f" />
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-link btn-floating mx-1"
+                  >
+                    <i className="fab fa-google" />
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-link btn-floating mx-1"
+                  >
+                    <i className="fab fa-twitter" />
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-link btn-floating mx-1"
+                  >
+                    <i className="fab fa-github" />
+                  </button>
                 </div>
               </form>
-              </div>
-             
-            
+            </div>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  </section>
+  {/* Section: Design Block */}
+</>
 
-export default Signup;
+    </div>
+  )
+}
+
+export default Signup
